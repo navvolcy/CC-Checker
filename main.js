@@ -24,52 +24,55 @@ const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, inval
 
 
 // Add your functions below:
-
 //function that validates the cardit card
-const validateCred = (arr) => {  
-    //length of the array
-    let len = arr.length -1;
-    //Reverse the array (now without the last digit).
-    let reverseArr = arr.slice(1).reverse();
-    //length of reverse array
-    let len2 = reverseArr.length;
-    //temp array
-    let tempArr = [];
-    let tempArr2 = [];
-  
-    for(let i = 1; i < arr.length ; i+=2){
-      sum = arr[i] * 2;
-      if(sum > 9){
-        sum -= 9;
-        tempArr.push(sum);
-      }
-      else{
-        tempArr.push(sum);
-      }
-      //console.log(tempArr);
-     }
-     for (let i = 0; i < arr.length; i+=2){
-       sum = arr[i];
-       tempArr2.push(sum)
-       //console.log(tempArr2)
-     }
-     //make two arrays become one
-     let newArr = tempArr.concat(tempArr2);
-     //console.log(newArr);
-     const getSum = a =>{
-       var total = 0;
-       for(var i in a){
-         total += a[i];
-       }
-       return total;
-     }
-    let sumedUp = getSum(newArr); 
-  
-  
-    
+const validateCred = (arr) => { 
+  let last = arr.pop()
+ //Reverse the array (now without the last digit).
+ let reverseArr = arr.reverse();
+ 
+ //temp array
+ let tempArr = [];
+ let tempArr2 = [];
+
+ //even gets doubled
+ for(let i = 0; i < reverseArr.length; i+=2){
+   sum = reverseArr[i] * 2;
+  // console.log("odd:",sum);
+   if(sum > 9){
+     sum -= 9;
+     tempArr.push(sum);
+   }
+   else{
+     tempArr.push(sum);
+   }
   }
   
-    console.log(validateCred(valid1));
+
+  //odd
+  for (let i = 1; i < reverseArr.length; i+=2){
+    sum = reverseArr[i];
+    tempArr2.push(sum)
+  }
+  
+  //make two arrays become one
+  let newArr = tempArr.concat(tempArr2);
+ 
+  const getSum = a =>{
+    var total = 0;
+    for(let i = 0; i < a.length; i++){
+      total += a[i];
+     
+    }
+    return total;
+  }
+ let sumedUp = getSum(newArr);
+  //dropped last digit in array
+ let newSum = sumedUp + last;
+
+ return (newSum % 10) == 0;
+ 
+}
+ console.log(validateCred(valid5));
 
 
 

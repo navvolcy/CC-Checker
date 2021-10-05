@@ -74,6 +74,13 @@ const validateCred = (arr) => {
 }
  console.log(validateCred(valid5));
 
+ const findInvalidCards = N_arr =>{
+
+  for ( let i = 0; i < N_arr.length; i++){
+     return validateCred(i);
+     }
+  }
+
 
 
 
